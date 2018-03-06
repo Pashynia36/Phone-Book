@@ -10,15 +10,30 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var contactPhone: UIButton!
     @IBOutlet weak var contactPhoto: UIImageView!
-    @IBOutlet weak var contactPhone: UILabel!
     @IBOutlet weak var contactName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
     }
     
-
+    
+    
+    
+    @IBAction func callTap(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Do you want to call to Andy?", message: "+333", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

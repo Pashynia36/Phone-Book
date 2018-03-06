@@ -11,7 +11,7 @@ import UIKit
 class PhoneBookController: UITableViewController {
 
     
-    let book = [Contact(name: "Andrew Speedy", phone: "+380 (95) 884 72 81")]
+    let book = [Contact(name: "Andrew Speedy", phone: "+380 (95) 884 72 81"), Contact(name:"Elon Musk", phone: "310-709-9497")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,7 @@ class PhoneBookController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,22 +39,56 @@ class PhoneBookController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return book.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DetailViewCell
-        cell.personName.text = "Pasha Novak"
-        cell.personNumber.text = "+377777777"
-        cell.personPhoto.image = UIImage(named: "")
+        cell.personName.text = book[indexPath.row].name
+        cell.personNumber.text = book[indexPath.row].phone
+        if let check = UIImage(named: book[indexPath.row].name) {
+            cell.personPhoto.image = check
+        } else {
+            cell.personPhoto.image = generateImageWithText(text: book[indexPath.row].name)
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailViewController
+        //vc.contactPhoto.image = UIImage(named: book[indexPath.row].name)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func generateImageWithText(text: String) -> UIImage
+    {
+        let image = UIImage()
+        var newText = ""
+        let myColor = UIColor(white: 0.0, alpha: 0.1)
         
-        self.navigationController?.pushViewController(vc!, animated: true)
+        let imageView = UIImageView(image: image)
+        imageView.backgroundColor = myColor
+        imageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        label.backgroundColor = UIColor.clear
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        
+        for i in text {
+            if i >= "A" && i <= "Z" {
+                newText.append(i)
+            }
+        }
+        label.text = newText
+        
+        UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, 0);
+        imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        label.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let imageWithText = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        return imageWithText!
     }
     /*
     // Override to support conditional editing of the table view.
