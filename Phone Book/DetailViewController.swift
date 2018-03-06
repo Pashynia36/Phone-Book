@@ -18,10 +18,11 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print((reference?.name)!)
         print((reference?.phone)!)
         contactName.text = reference?.name
-        contactPhone.titleLabel?.text = reference?.phone
+        contactPhone.setTitle(reference?.phone, for: .normal)
         if let check = UIImage(named: (reference?.image)!) {
             contactPhoto.image = check
         } else {
