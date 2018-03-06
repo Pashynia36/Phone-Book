@@ -15,21 +15,34 @@ class PhoneBookController: UITableViewController {
     class CNPhoneNumber
     */
     let contactStore = CNContactStore()
-    let colors = [UIColor.black, UIColor.blue, UIColor.brown, UIColor.magenta, UIColor.cyan, UIColor.green, UIColor.red, UIColor.darkGray]
-    let book = [Contact(name: "Andrew Speedy", phone: "+380 (95) 884 72 81", image: "Andrew Speedy"),
-                Contact(name:"Elon Musk", phone: "310-709-9497", image: "Elon Musk"),
-                Contact(name:"Albert Einstein", phone: "777-777-777", image: "Albert Einstein"),
-                Contact(name:"Richard Nixon", phone: "555-0123-555", image: "Richard Nixon"),
-                Contact(name:"Ada Lovelace", phone: "", image: "Ada Lovelace"),
-                Contact(name:"Father", phone: "1960-03-06", image: "Father")]
+    let colors = [UIColor.black, UIColor.blue, UIColor.brown, UIColor.magenta, UIColor.cyan, UIColor.green, UIColor.red, UIColor.darkGray, UIColor.orange, UIColor.purple, UIColor.yellow]
+    var book = [Contact]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        contactStore.requestAccess(for: .contacts) { (success, error) in
+            if success {
+                print("Authorization Successful")
+            }
+        }
+        setUpNavAppear()
+        
+        fetchContacts()
         // self.clearsSelectionOnViewWillAppear = false
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.reloadData()
+    }
+    
+    // залить проект на гит, вручную сделать деселект поля
+    //
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setUpNavAppear()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,13 +62,14 @@ class PhoneBookController: UITableViewController {
         return book.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DetailViewCell
         cell.personName.text = book[indexPath.row].name
         cell.personNumber.text = book[indexPath.row].phone
+        //print(book[indexPath.row].name)
         if let check = UIImage(named: book[indexPath.row].name) {
             cell.personPhoto.image = check
+            cell.personPhoto.layer.borderWidth = 2.0
         } else {
             cell.personPhoto.image = generateImageWithText(text: book[indexPath.row].name)
         }
@@ -64,15 +78,32 @@ class PhoneBookController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailViewController
-        /*if let check = UIImage(named: book[indexPath.row].name) {
-            vc.contactPhoto.image = check
-        } else {
-            vc.contactPhoto.image = generateImageWithText(text: book[indexPath.row].name)
-        }*/
-        //vc.contactName.text = book[indexPath.row].name
-        //vc.contactPhone.titleLabel?.text = book[indexPath.row].phone
         vc.reference = book[indexPath.row]
+        vc.tabBarController?.title = "1234"
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setUpNavAppear() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = .white
+        navigationItem.title = "Phone Book"
+    }
+    
+    func fetchContacts() {
+        
+        let key = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        let request = CNContactFetchRequest(keysToFetch: key)
+        try! contactStore.enumerateContacts(with: request) { (contact, stoppingPointer) in
+            let name = contact.givenName + " " + contact.familyName
+            let number = contact.phoneNumbers.first?.value.stringValue
+            
+            let contactToAppend = Contact(name: name, phone: number!)
+            
+            self.book.append(contactToAppend)
+        }
+        tableView.reloadData()
     }
     
     func generateImageWithText(text: String) -> UIImage
@@ -93,7 +124,10 @@ class PhoneBookController: UITableViewController {
         label.textColor = UIColor.black
         
         for i in text {
-            if i >= "A" && i <= "Z" {
+            if newText.count == 2 {
+                break
+            }
+            if i >= "A" && i <= "Z" || i >= "А" && i <= "Я" {
                 newText.append(i)
             }
         }
@@ -103,7 +137,7 @@ class PhoneBookController: UITableViewController {
         imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
         label.layer.render(in: UIGraphicsGetCurrentContext()!)
         let imageWithText = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         
         return imageWithText!
     }

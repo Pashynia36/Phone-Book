@@ -12,6 +12,7 @@ class DetailViewController: UIViewController {
     
     var reference: Contact?
 
+    
     @IBOutlet weak var contactPhone: UIButton!
     @IBOutlet weak var contactPhoto: UIImageView!
     @IBOutlet weak var contactName: UILabel!
@@ -19,18 +20,29 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print((reference?.name)!)
-        print((reference?.phone)!)
+        setUpNavAppear()
+        
+//        print((reference?.name)!)
+//        print((reference?.phone)!)
         contactName.text = reference?.name
         contactPhone.setTitle(reference?.phone, for: .normal)
-        if let check = UIImage(named: (reference?.image)!) {
+        
+        if let check = UIImage(named: (reference?.name)!) {
             contactPhoto.image = check
         } else {
             contactPhoto.image = generateImageWithText(text: (reference?.name)!)
         }
-        
     }
-   
+
+    func setUpNavAppear(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .white
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
     @IBAction func callTap(_ sender: UIButton) {
         if let name = reference?.name, let phone = reference?.phone {
             let alert = UIAlertController(title: "Call", message: "\(name)", preferredStyle: .actionSheet)
@@ -55,7 +67,10 @@ class DetailViewController: UIViewController {
         label.textColor = UIColor.black
         
         for i in text {
-            if i >= "A" && i <= "Z" {
+            if newText.count == 2 {
+                break
+            }
+            if i >= "A" && i <= "Z" || i >= "А" && i <= "Я" {
                 newText.append(i)
             }
         }
