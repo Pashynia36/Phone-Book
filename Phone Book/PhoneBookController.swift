@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Contacts
 
 class PhoneBookController: UITableViewController {
 
+    /*
+    class CNPhoneNumber
+    */
+    let contactStore = CNContactStore()
     let colors = [UIColor.black, UIColor.blue, UIColor.brown, UIColor.magenta, UIColor.cyan, UIColor.green, UIColor.red, UIColor.darkGray]
     let book = [Contact(name: "Andrew Speedy", phone: "+380 (95) 884 72 81", image: "Andrew Speedy"),
                 Contact(name:"Elon Musk", phone: "310-709-9497", image: "Elon Musk"),
@@ -21,10 +26,7 @@ class PhoneBookController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.reloadData()
