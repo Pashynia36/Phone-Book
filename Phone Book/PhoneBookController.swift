@@ -10,8 +10,13 @@ import UIKit
 
 class PhoneBookController: UITableViewController {
 
-    
-    let book = [Contact(name: "Andrew Speedy", phone: "+380 (95) 884 72 81"), Contact(name:"Elon Musk", phone: "310-709-9497")]
+    let colors = [UIColor.black, UIColor.blue, UIColor.brown, UIColor.magenta, UIColor.cyan, UIColor.green, UIColor.red, UIColor.darkGray]
+    let book = [Contact(name: "Andrew Speedy", phone: "+380 (95) 884 72 81", image: "Andrew Speedy"),
+                Contact(name:"Elon Musk", phone: "310-709-9497", image: "Elon Musk"),
+                Contact(name:"Albert Einstein", phone: "777-777-777", image: "Albert Einstein"),
+                Contact(name:"Richard Nixon", phone: "555-0123-555", image: "Richard Nixon"),
+                Contact(name:"Ada Lovelace", phone: "", image: "Ada Lovelace"),
+                Contact(name:"Father", phone: "1960-03-06", image: "Father")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +62,14 @@ class PhoneBookController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailViewController
-        //vc.contactPhoto.image = UIImage(named: book[indexPath.row].name)
+        /*if let check = UIImage(named: book[indexPath.row].name) {
+            vc.contactPhoto.image = check
+        } else {
+            vc.contactPhoto.image = generateImageWithText(text: book[indexPath.row].name)
+        }*/
+        //vc.contactName.text = book[indexPath.row].name
+        //vc.contactPhone.titleLabel?.text = book[indexPath.row].phone
+        vc.reference = book[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -65,8 +77,11 @@ class PhoneBookController: UITableViewController {
     {
         let image = UIImage()
         var newText = ""
-        let myColor = UIColor(white: 0.0, alpha: 0.1)
-        
+        func chooseColor() -> UIColor {
+            let rand = Int(arc4random_uniform(UInt32(colors.count)))
+            return colors[rand].withAlphaComponent(0.2)
+        }
+        let myColor = chooseColor()
         let imageView = UIImageView(image: image)
         imageView.backgroundColor = myColor
         imageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)

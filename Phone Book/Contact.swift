@@ -14,9 +14,9 @@ class Contact {
     var phone: String
     var image: String
     
-    init(name: String, phone: String) {
+    init(name: String, phone: String, image: String) {
         self.name = name
         self.phone = phone
-        self.image = name
+        self.image = image
     }
 }
