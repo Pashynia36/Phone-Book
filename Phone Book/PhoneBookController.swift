@@ -43,7 +43,6 @@ class PhoneBookController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setUpNavAppear()
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +80,7 @@ class PhoneBookController: UITableViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailViewController
         vc.reference = book[indexPath.row]
         vc.tabBarController?.title = "1234"
+        tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

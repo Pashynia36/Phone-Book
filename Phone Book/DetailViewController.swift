@@ -48,6 +48,7 @@ class DetailViewController: UIViewController {
             let alert = UIAlertController(title: "Call", message: "\(name)", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "\(phone)", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            //UIApplication.shared.openURL(NSURL(string: "\(phone)")! as URL)
             self.present(alert, animated: true)
         }
     }
