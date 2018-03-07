@@ -27,6 +27,7 @@ class DetailViewController: UIViewController {
         
         if let check = UIImage(named: (reference?.name)!) {
             contactPhoto.image = check
+            contactPhoto.layer.borderWidth = 2.0
         } else {
             contactPhoto.image = UIImage.generateImageWithText(text: (reference?.name)!, color: UIColor.lightGray.withAlphaComponent(0.2))
         }
