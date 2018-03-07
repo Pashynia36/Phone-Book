@@ -17,7 +17,6 @@ class DetailViewCell: UITableViewCell {
     override func awakeFromNib(){
         
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool){
@@ -25,11 +24,12 @@ class DetailViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func prepareForCell(cell: Contact, indexPath: Int){
+    func prepareForCell(person: Contact, indexPath: Int){
         
-        personName.text = cell.name
-        personNumber.text = cell.phone
-        if let check = UIImage(named: cell.name) {
+        personName.text = person.name
+        personNumber.text = person.phone
+        if let check = UIImage(named: person.name) {
+            print()
             personPhoto.image = check
             personPhoto.layer.borderWidth = 2.0
         } else {

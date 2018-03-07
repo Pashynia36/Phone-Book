@@ -12,7 +12,7 @@ import Contacts
 class PhoneBookController: UITableViewController {
 
     var images = [Contact]()
-    let contactStore = CNContactStore()  //to save and fetch contacts to/from contactBook
+    let contactStore = CNContactStore()
     var book = [Contact]()
     
     override func viewDidLoad(){
@@ -24,14 +24,10 @@ class PhoneBookController: UITableViewController {
         
         contactStore.requestAccess(for: .contacts) { (success, error) in
             if success {
-                print("Authorization Successful")
+                print("Authorization successful")
             }
         }
-        setUpNavAppear()
-        
         fetchContacts()
-        // self.clearsSelectionOnViewWillAppear = false
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
@@ -41,29 +37,15 @@ class PhoneBookController: UITableViewController {
         setUpNavAppear()
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // #warning Incomplete implementation, return the number of rows
         return book.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DetailViewCell
-        cell.prepareForCell(cell: book[indexPath.row], indexPath: indexPath.row)
-        /*
-        if let check = UIImage(named: images[indexPath.row].name) {
-            cell.personPhoto.image = check
-            cell.personPhoto.layer.borderWidth = 2.0
-        } else {
-            cell.personPhoto.image = generateImageWithText(text: book[indexPath.row].name, color: chooseColor())
-        }*/
+        cell.prepareForCell(person: book[indexPath.row], indexPath: indexPath.row)
         return cell
     }
     
@@ -71,7 +53,6 @@ class PhoneBookController: UITableViewController {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailViewController
         vc.reference = book[indexPath.row]
-        vc.tabBarController?.title = "1234"
         tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)
     }

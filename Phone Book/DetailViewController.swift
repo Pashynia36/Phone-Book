@@ -12,7 +12,6 @@ class DetailViewController: UIViewController {
     
     var reference: Contact?
 
-    
     @IBOutlet weak var contactPhone: UIButton!
     @IBOutlet weak var contactPhoto: UIImageView!
     @IBOutlet weak var contactName: UILabel!
@@ -23,8 +22,6 @@ class DetailViewController: UIViewController {
         
         setUpNavAppear()
         
-//        print((reference?.name)!)
-//        print((reference?.phone)!)
         contactName.text = reference?.name
         contactPhone.setTitle(reference?.phone, for: .normal)
         
@@ -55,38 +52,4 @@ class DetailViewController: UIViewController {
             self.present(alert, animated: true)
         }
     }
-    
-    func generateImageWithText(text: String) -> UIImage{
-        
-        let image = UIImage()
-        var newText = ""
-        let myColor = UIColor(white: 0.1, alpha: 0.2)
-        
-        let imageView = UIImageView(image: image)
-        imageView.backgroundColor = myColor
-        imageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        label.backgroundColor = UIColor.clear
-        label.textAlignment = .center
-        label.textColor = UIColor.black
-        
-        for i in text {
-            if newText.count == 2 {
-                break
-            }
-            if i >= "A" && i <= "Z" || i >= "А" && i <= "Я" {
-                newText.append(i)
-            }
-        }
-        label.text = newText
-        
-        UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, 0);
-        imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        label.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let imageWithText = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        
-        return imageWithText!
-    }
-
 }
