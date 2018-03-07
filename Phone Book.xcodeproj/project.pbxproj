@@ -15,6 +15,7 @@
 		4E1E36F5204E8E2F00696EBD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E36F4204E8E2F00696EBD /* DetailViewController.swift */; };
 		4E1E36F7204E905D00696EBD /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E36F6204E905D00696EBD /* DetailViewCell.swift */; };
 		4E1E36F9204E93F300696EBD /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E36F8204E93F300696EBD /* Contact.swift */; };
+		4EB4690D204FEEBA00BFA23C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB4690C204FEEBA00BFA23C /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4E1E36F4204E8E2F00696EBD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4E1E36F6204E905D00696EBD /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
 		4E1E36F8204E93F300696EBD /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		4EB4690C204FEEBA00BFA23C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				4E1E36F8204E93F300696EBD /* Contact.swift */,
 				4E1E36F1204E8D7C00696EBD /* Supporting Files */,
 				4E1E36EB204E8D7100696EBD /* Info.plist */,
+				4EB4690C204FEEBA00BFA23C /* Utilities.swift */,
 			);
 			path = "Phone Book";
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB4690D204FEEBA00BFA23C /* Utilities.swift in Sources */,
 				4E1E36F5204E8E2F00696EBD /* DetailViewController.swift in Sources */,
 				4E1E36F7204E905D00696EBD /* DetailViewCell.swift in Sources */,
 				4E1E36F9204E93F300696EBD /* Contact.swift in Sources */,

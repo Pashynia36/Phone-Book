@@ -14,6 +14,7 @@
         <!--Phone Book Controller-->
         <scene sceneID="U1y-9m-nAp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SrJ-zk-zTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="PsE-ED-ix4" customClass="PhoneBookController" customModule="Phone_Book" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B9v-jm-j1S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -81,13 +82,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Zht-XB-cjP"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SrJ-zk-zTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="314.39999999999998" y="-4.0479760119940034"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="J8t-KK-QbB">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GBw-XR-9Si" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Detail" id="iS5-g6-T7q" customClass="DetailViewController" customModule="Phone_Book" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V8y-2h-mdp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -145,7 +146,6 @@
                         <outlet property="contactPhoto" destination="otE-dH-wTc" id="19j-nv-son"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GBw-XR-9Si" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1189.5999999999999" y="-4.0479760119940034"/>
         </scene>

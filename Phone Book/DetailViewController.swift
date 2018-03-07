@@ -17,7 +17,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var contactPhoto: UIImageView!
     @IBOutlet weak var contactName: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         setUpNavAppear()
@@ -30,11 +31,12 @@ class DetailViewController: UIViewController {
         if let check = UIImage(named: (reference?.name)!) {
             contactPhoto.image = check
         } else {
-            contactPhoto.image = generateImageWithText(text: (reference?.name)!)
+            contactPhoto.image = UIImage.generateImageWithText(text: (reference?.name)!, color: CGColor.chooseColor())
         }
     }
 
     func setUpNavAppear(){
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .white
@@ -43,7 +45,8 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
-    @IBAction func callTap(_ sender: UIButton) {
+    @IBAction func callTap(_ sender: UIButton){
+        
         if let name = reference?.name, let phone = reference?.phone {
             let alert = UIAlertController(title: "Call", message: "\(name)", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "\(phone)", style: .default, handler: nil))
@@ -53,8 +56,8 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func generateImageWithText(text: String) -> UIImage
-    {
+    func generateImageWithText(text: String) -> UIImage{
+        
         let image = UIImage()
         var newText = ""
         let myColor = UIColor(white: 0.1, alpha: 0.2)
@@ -85,17 +88,5 @@ class DetailViewController: UIViewController {
         
         return imageWithText!
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
