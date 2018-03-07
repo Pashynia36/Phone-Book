@@ -29,11 +29,11 @@ class DetailViewCell: UITableViewCell {
         personName.text = person.name
         personNumber.text = person.phone
         if let check = UIImage(named: person.name) {
-            print()
             personPhoto.image = check
             personPhoto.layer.borderWidth = 2.0
         } else {
             personPhoto.image = UIImage.generateImageWithText(text: personName.text!, color: CGColor.chooseColor())
+            personPhoto.layer.borderWidth = 0.0
         }
     }
 }
