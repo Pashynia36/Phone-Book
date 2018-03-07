@@ -75,7 +75,6 @@ class PhoneBookController: UITableViewController {
             let number = contact.phoneNumbers.first?.value.stringValue
             
             let contactToAppend = Contact(name: name, phone: number!)
-            
             self.book.append(contactToAppend)
         }
         tableView.reloadData()
