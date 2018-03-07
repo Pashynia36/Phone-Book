@@ -43,6 +43,7 @@ class PhoneBookController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setUpNavAppear()
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
