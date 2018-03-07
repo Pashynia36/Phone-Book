@@ -16,8 +16,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var contactPhoto: UIImageView!
     @IBOutlet weak var contactName: UILabel!
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
+        
         super.viewDidLoad()
         
         setUpNavAppear()
@@ -48,7 +48,6 @@ class DetailViewController: UIViewController {
             let alert = UIAlertController(title: "Call", message: "\(name)", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "\(phone)", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-            //UIApplication.shared.openURL(NSURL(string: "\(phone)")! as URL)
             self.present(alert, animated: true)
         }
     }
